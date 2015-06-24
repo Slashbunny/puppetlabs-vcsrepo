@@ -209,7 +209,7 @@ Puppet::Type.type(:vcsrepo).provide(:git, :parent => Puppet::Provider::Vcsrepo) 
       if @resource.value(:force)
         notice "Removing %s to replace with vcsrepo." % @resource.value(:path)
         destroy
-      else
+      elsif !working_copy_exists?
         raise Puppet::Error, "Could not create repository (non-repository at path)"
       end
     end
