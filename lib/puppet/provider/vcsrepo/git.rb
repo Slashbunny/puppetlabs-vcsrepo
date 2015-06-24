@@ -102,11 +102,7 @@ Puppet::Type.type(:vcsrepo).provide(:git, :parent => Puppet::Provider::Vcsrepo) 
   end
 
   def working_copy_exists?
-    if @resource.value(:source) and File.exists?(File.join(@resource.value(:path), '.git', 'config'))
-      File.readlines(File.join(@resource.value(:path), '.git', 'config')).grep(/#{default_url}/).any?
-    else
-      File.directory?(File.join(@resource.value(:path), '.git'))
-    end
+    File.directory?(File.join(@resource.value(:path), '.git'))
   end
 
   def exists?
